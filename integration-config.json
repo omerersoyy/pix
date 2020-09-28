@@ -1,0 +1,9 @@
+{
+    "api": "api3",
+    "pathWayForImageSet": {
+        "root": "swipers",
+        "each": "swiper",
+        "set": "image_set",
+        "prop": "image_url"
+    }
+}
