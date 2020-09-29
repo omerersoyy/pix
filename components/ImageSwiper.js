@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import { View, Dimensions, StyleSheet } from "react-native";
+import { View, Dimensions } from "react-native";
 import { FlingGestureHandler, Directions } from 'react-native-gesture-handler'
 import { getSwipeDirection } from '../util/helpers/GestureHelper'
 import Animated, { Easing } from 'react-native-reanimated'
 import styles from './styles/ImageSwiperStyles'
 
-export default ImageSwiper = ({ images }) => {
+export default ImageSwiper = ({ images, prop }) => {
 
     const [currentImgIdx, setCurrentImgIdx] = useState(0)
     const screenWidth = Dimensions.get("screen").width
@@ -64,7 +64,7 @@ export default ImageSwiper = ({ images }) => {
                             ],
                         }]
                     }
-                    source={{ uri: images && images[currentImgIdx].image_url }}
+                    source={{ uri: images && images[currentImgIdx][prop] }}
                 />
             </FlingGestureHandler>
         </View>

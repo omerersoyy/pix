@@ -2,8 +2,9 @@ import Service from '../service/Service'
 import { ImagesTypes } from '../redux/ImagesRedux'
 import { getImages } from '../sagas/ImagesSagas'
 import { all, takeLatest } from 'redux-saga/effects'
+import config from '../integration-config.json'
 
-const client = new Service("api3")
+const client = new Service(config.api)
 
 
 export default function* root() {
