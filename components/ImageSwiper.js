@@ -1,12 +1,24 @@
-import React, { useRef, useState } from "react";
-import { View, StyleSheet, PanResponder, Text, Image, Dimensions } from "react-native";
+import React, { useState } from "react";
+import { View, Dimensions, StyleSheet } from "react-native";
 import { FlingGestureHandler, Directions } from 'react-native-gesture-handler'
 import { getSwipeDirection } from '../util/helpers/GestureHelper'
+import Animated, { Easing } from 'react-native-reanimated'
+import styles from './styles/ImageSwiperStyles'
 
 export default ImageSwiper = ({ images }) => {
 
     const [currentImgIdx, setCurrentImgIdx] = useState(0)
     const screenWidth = Dimensions.get("screen").width
+    const [opacity, setOpacity] = useState(new Animated.Value(0.7))
+
+    const onLoadImage = () => {
+        Animated.timing(opacity, {
+            toValue: 1,
+            duration: 500,
+            useNativeDriver: true,
+            easing: Easing.sin
+        }).start();
+    }
 
     const onHandlerStateChange = (e) => {
 
@@ -14,6 +26,7 @@ export default ImageSwiper = ({ images }) => {
         const { nativeEvent } = e
 
         if (nativeEvent.oldState === 4) {
+            setOpacity(new Animated.Value(0.7))
             const direction = getSwipeDirection(nativeEvent, screenWidth)
 
             if (direction === Directions.RIGHT) {
@@ -34,9 +47,25 @@ export default ImageSwiper = ({ images }) => {
     }
 
     return (
-        <View style={{ flex: 1 }}>
+        <View style={styles.container}>
             <FlingGestureHandler direction={Directions.RIGHT | Directions.LEFT} onHandlerStateChange={onHandlerStateChange} >
-                <Image style={{ width: '100%', height: 300 }} source={{ uri: images && images[currentImgIdx].image_url }} />
+                <Animated.Image
+                    onLoad={onLoadImage}
+                    style={
+                        [styles.image, {
+                            opacity: opacity,
+                            transform: [
+                                {
+                                    scale: opacity.interpolate({
+                                        inputRange: [0, 1],
+                                        outputRange: [0.91, 1],
+                                    })
+                                },
+                            ],
+                        }]
+                    }
+                    source={{ uri: images && images[currentImgIdx].image_url }}
+                />
             </FlingGestureHandler>
         </View>
     )
