@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import { View, Dimensions } from "react-native";
+import { View, Dimensions, Image } from "react-native";
 import { FlingGestureHandler, Directions } from 'react-native-gesture-handler'
 import { getSwipeDirection } from '../util/helpers/GestureHelper'
 import Animated, { Easing } from 'react-native-reanimated'
 import styles from './styles/ImageSwiperStyles'
+import ImagePager from "./ImagePager";
 
 export default ImageSwiper = ({ images, prop }) => {
 
@@ -48,7 +49,10 @@ export default ImageSwiper = ({ images, prop }) => {
 
     return (
         <View style={styles.container}>
-            <FlingGestureHandler direction={Directions.RIGHT | Directions.LEFT} onHandlerStateChange={onHandlerStateChange} >
+            <FlingGestureHandler 
+                direction={Directions.RIGHT | Directions.LEFT} 
+                onHandlerStateChange={onHandlerStateChange} 
+                >
                 <Animated.Image
                     onLoad={onLoadImage}
                     style={
@@ -65,8 +69,10 @@ export default ImageSwiper = ({ images, prop }) => {
                         }]
                     }
                     source={{ uri: images && images[currentImgIdx][prop] }}
+                    resizeMode={'cover'}
                 />
             </FlingGestureHandler>
+            <ImagePager current={currentImgIdx + 1} total={images.length} />
         </View>
     )
 }
