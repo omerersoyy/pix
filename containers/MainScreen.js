@@ -4,31 +4,39 @@ import imagesActions from '../redux/ImagesRedux'
 import { View } from 'react-native'
 import ImageSwiper from '../components/ImageSwiper';
 import config from '../integration-config.json'
-import {extractImageSet} from '../util/helpers/DataHelper'
+import { extractImageSet } from '../util/helpers/DataHelper'
+import styles from './styles/MainScreenStyles'
+import GenericHeader from '../components/GenericHeader';
+
 
 const MainScreen = ({ dispatch, data }) => {
 
     const [imageSet, setImageSet] = useState([])
-    
+
     useEffect(() => {
         dispatch(imagesActions.getImages())
     }, [])
 
     useEffect(() => {
-        if(data) {
-            const imageSet = extractImageSet(data, config.pathWayForImageSet)
-            setImageSet(imageSet)
+        if (data) {
+            try {
+                const imageSet = extractImageSet(data, config.pathWayForImageSet)
+                setImageSet(imageSet)
+            } catch (err) {
+                alert(":(")
+            }
         }
     }, [data])
 
     return (
-        <View style={{flex: 1, width: '100%', height: '100%'}}>
+        <View style={styles.container}>
+            <GenericHeader title={'Pix Gallery'} />
             {
                 imageSet.map((val, idx) => {
                     return (
                         <ImageSwiper key={idx} images={val.data} prop={val.prop} />
                     )
-                }) 
+                })
             }
         </View>
     )

@@ -4,7 +4,7 @@ import { StyleSheet } from "react-native";
 export default styles = StyleSheet.create({
     container: {
         margin: 1,
-        marginTop: 40,
+        marginTop: 11,
         shadowColor: '#2b2a2a',
         shadowOffset: {
             width: 0,

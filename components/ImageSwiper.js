@@ -68,11 +68,11 @@ export default ImageSwiper = ({ images, prop }) => {
                             ],
                         }]
                     }
-                    source={{ uri: images && images[currentImgIdx][prop] }}
+                    source={{ uri: images && images[currentImgIdx] && images[currentImgIdx][prop] }}
                     resizeMode={'cover'}
                 />
             </FlingGestureHandler>
-            <ImagePager current={currentImgIdx + 1} total={images.length} />
+            {images.length && <ImagePager current={currentImgIdx + 1} total={images && images.length} />}
         </View>
     )
 }
