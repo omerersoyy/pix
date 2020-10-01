@@ -1,5 +1,6 @@
 
-import { StyleSheet } from "react-native";
+import { StyleSheet } from "react-native"
+import {Platform} from 'react-native'
 
 export default styles = StyleSheet.create({
     container: {
@@ -13,6 +14,6 @@ export default styles = StyleSheet.create({
         fontWeight: 'bold',
         textAlign: 'center',
         color: 'white',
-        marginTop: 20
+        marginTop: Platform.OS === "ios" ? 30 : 20
     }
 });
