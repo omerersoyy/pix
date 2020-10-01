@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import { View, Dimensions, Image } from "react-native"
+import { View, Dimensions } from "react-native"
 import { FlingGestureHandler, Directions } from 'react-native-gesture-handler'
 import { getSwipeDirection } from '../util/helpers/GestureHelper'
 import Animated, { Easing } from 'react-native-reanimated'
@@ -10,7 +10,7 @@ import config from '../integration-config.json'
 export default ImageSwiper = ({ images, prop }) => {
 
     const [currentImgIdx, setCurrentImgIdx] = useState(0)
-    const screenWidth = Dimensions.get("screen").width
+    const width = config?.swiperStyles?.width || Dimensions.get("screen").width
     const [opacity, setOpacity] = useState(new Animated.Value(0.7))
     const customStyles = config.swiperStyles
 
@@ -24,13 +24,11 @@ export default ImageSwiper = ({ images, prop }) => {
     }
 
     const onHandlerStateChange = (e) => {
-
-        e.persist()
         const { nativeEvent } = e
 
         if (nativeEvent.oldState === 4) {
             setOpacity(new Animated.Value(0.7))
-            const direction = getSwipeDirection(nativeEvent, screenWidth)
+            const direction = getSwipeDirection(nativeEvent, width)
 
             if (direction === Directions.RIGHT) {
                 if (currentImgIdx !== images.length - 1) {
