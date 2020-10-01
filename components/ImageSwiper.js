@@ -1,16 +1,18 @@
-import React, { useState } from "react";
-import { View, Dimensions, Image } from "react-native";
+import React, { useState } from "react"
+import { View, Dimensions, Image } from "react-native"
 import { FlingGestureHandler, Directions } from 'react-native-gesture-handler'
 import { getSwipeDirection } from '../util/helpers/GestureHelper'
 import Animated, { Easing } from 'react-native-reanimated'
 import styles from './styles/ImageSwiperStyles'
-import ImagePager from "./ImagePager";
+import ImagePager from "./ImagePager"
+import config from '../integration-config.json'
 
 export default ImageSwiper = ({ images, prop }) => {
 
     const [currentImgIdx, setCurrentImgIdx] = useState(0)
     const screenWidth = Dimensions.get("screen").width
     const [opacity, setOpacity] = useState(new Animated.Value(0.7))
+    const customStyles = config.swiperStyles
 
     const onLoadImage = () => {
         Animated.timing(opacity, {
@@ -48,7 +50,7 @@ export default ImageSwiper = ({ images, prop }) => {
     }
 
     return (
-        <View style={styles.container}>
+        <View style={[styles.container, {...customStyles}]}>
             <FlingGestureHandler 
                 direction={Directions.RIGHT | Directions.LEFT} 
                 onHandlerStateChange={onHandlerStateChange} 
@@ -65,7 +67,7 @@ export default ImageSwiper = ({ images, prop }) => {
                                         outputRange: [0.91, 1],
                                     })
                                 },
-                            ],
+                            ]
                         }]
                     }
                     source={{ uri: images && images[currentImgIdx] && images[currentImgIdx][prop] }}

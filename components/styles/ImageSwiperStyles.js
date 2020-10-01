@@ -13,10 +13,10 @@ export default styles = StyleSheet.create({
         shadowOpacity: 0.9,
         shadowRadius: 10,
         elevation: 5,
-        borderRadius: 10
+        borderRadius: 10,
+
     },
     image: {
-        width: '100%',
         height: 300,
         borderRadius: 10
     }

@@ -1,17 +1,37 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux';
 import imagesActions from '../redux/ImagesRedux'
 import { View } from 'react-native'
-import ImageSwiper from '../components/ImageSwiper';
+import ImageSwiper from '../components/ImageSwiper'
 import config from '../integration-config.json'
 import { extractImageSet } from '../util/helpers/DataHelper'
 import styles from './styles/MainScreenStyles'
-import GenericHeader from '../components/GenericHeader';
+import GenericHeader from '../components/GenericHeader'
 
 
 const MainScreen = ({ dispatch, data }) => {
 
+    const {position} = config
     const [imageSet, setImageSet] = useState([])
+    let swiperContainerStyle
+
+    if(position) {
+        swiperContainerStyle = {
+            height: '100%'
+        }
+
+        if(position === "top") {
+            swiperContainerStyle.justifyContent = "flex-start"
+        } else if(position === "middle") {
+            swiperContainerStyle.justifyContent = "center"
+        } else if(position === "bottom") {
+            swiperContainerStyle.justifyContent = "flex-end"
+        } else {
+            //TO-DO: invalid config alert
+        }
+    } else {
+
+    }
 
     useEffect(() => {
         dispatch(imagesActions.getImages())
@@ -34,7 +54,9 @@ const MainScreen = ({ dispatch, data }) => {
             {
                 imageSet.map((val, idx) => {
                     return (
-                        <ImageSwiper key={idx} images={val.data} prop={val.prop} />
+                        <View key={idx} style={{...swiperContainerStyle}}>
+                            <ImageSwiper  images={val.data} prop={val.prop} />
+                        </View>
                     )
                 })
             }

@@ -5,5 +5,10 @@
         "each": "swiper",
         "set": "image_set",
         "prop": "image_url"
-    }
+    },
+    "swiperStyles": {
+        "width": "100%",
+        "height": 300
+    },
+    "position": "top"
 }
