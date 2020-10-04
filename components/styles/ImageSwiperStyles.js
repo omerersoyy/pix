@@ -4,7 +4,6 @@ import { StyleSheet } from "react-native";
 export default styles = StyleSheet.create({
     container: {
         margin: 1,
-        marginTop: 11,
         shadowColor: '#2b2a2a',
         shadowOffset: {
             width: 0,
@@ -14,10 +13,10 @@ export default styles = StyleSheet.create({
         shadowRadius: 10,
         elevation: 5,
         borderRadius: 10,
-
+        padding: 7
     },
     image: {
-        height: 300,
+        height: '100%',
         borderRadius: 10
     }
 });
