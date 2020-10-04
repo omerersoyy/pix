@@ -1,14 +1,9 @@
 import MockData from './Api'
 
 export default class Service {
-    constructor(api) {
-        this.api = api
-    }
-
-    getImages() {
-
-        return (
-            MockData[this.api]
-        )
-    }
+    
+    getImages = () =>
+        fetch("/images")
+            .then((resp) => resp.json())
+            .catch(err => console.log(err))
 }

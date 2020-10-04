@@ -3,9 +3,11 @@ import imagesActions from '../redux/ImagesRedux';
 
 export function* getImages(service) {
 
-    const response = service.getImages()
+    const response = yield call(service.getImages)
 
-    yield delay(1000)
-
-    yield put(imagesActions.getImagesSuccess(response))
+    if (response.error) {
+        yield put(imagesActions.getImagesError("Bir hata oluştu!") || response.error)
+    } else {
+        yield put(imagesActions.getImagesSuccess(response))
+    }
 }
