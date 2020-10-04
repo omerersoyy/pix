@@ -7,8 +7,11 @@
         "prop": "image_url"
     },
     "swiperStyles": {
-        "width": "100%",
+        "width": 180,
         "height": 300
     },
-    "position": "top"
+    "position": {
+        "vertical": "middle",
+        "horizontal": "middle"
+    }
 }

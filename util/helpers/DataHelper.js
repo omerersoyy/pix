@@ -27,3 +27,19 @@ export const extractImageSet = (rawData, config) => {
         }
     }
 }
+
+export const getFlexPositions = ({vertical, horizontal}) => {
+    
+    const flexPositions = {
+        top: "flex-start",
+        left: "flex-start",
+        middle: "center",
+        bottom: "flex-end",
+        right: "flex-end"
+    }
+
+    return {
+        justifyContent: flexPositions[vertical],
+        alignItems: flexPositions[horizontal]
+    }
+}
