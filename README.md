@@ -66,3 +66,9 @@ You can customize the app via integration-config.json as follows:
         "height": 300 #or in percentage
 }
 ```
+
+#### Screenshots (iOS)
+
+  Position: Top            |  Middle                   |  Bottom
+:-------------------------:|:-------------------------:|:-------------------------
+<img src="https://github.com/omerersoyy/pix/blob/master/screenshots/ios-top.png" width="300">  |  !<img src="https://github.com/omerersoyy/pix/blob/master/screenshots/ios-mid.png" width="300"> | <img src="https://github.com/omerersoyy/pix/blob/master/screenshots/ios-bottom.png" width="300">
