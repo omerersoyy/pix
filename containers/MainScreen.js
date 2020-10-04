@@ -13,10 +13,10 @@ import i18n from '../util/I18n'
 const MainScreen = ({ dispatch, data, error }) => {
 
     const { position } = config
-    const [imageSet, setImageSet] = useState([])
+    const [swipers, setSwipers] = useState([])
     let swiperContainerStyle
 
-    if (position) {
+    if (position && swipers.length === 1) {
         swiperContainerStyle = {
             height: '100%',
             ...getFlexPositions(position)
@@ -29,8 +29,8 @@ const MainScreen = ({ dispatch, data, error }) => {
 
     useEffect(() => {
         if (data) {
-            const imageSet = extractImageSet(data, config.pathWayForImageSet)
-            setImageSet(imageSet)
+            const swipers = extractImageSet(data, config.pathWayForImageSet)
+            setSwipers(swipers)
         }
     }, [data])
 
@@ -51,7 +51,7 @@ const MainScreen = ({ dispatch, data, error }) => {
         <View style={styles.container}>
             <GenericHeader title={i18n.t('mainScreenHeader')} />
             {
-                imageSet.map((val, idx) => {
+                swipers.map((val, idx) => {
                     return (
                         <View key={idx} style={{ ...swiperContainerStyle }}>
                             <ImageSwiper images={val.data} prop={val.prop} />

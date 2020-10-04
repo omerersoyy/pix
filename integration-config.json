@@ -1,4 +1,5 @@
 {
+    "lang": "tr",
     "api": "api3",
     "pathWayForImageSet": {
         "root": "swipers",
@@ -7,11 +8,11 @@
         "prop": "image_url"
     },
     "swiperStyles": {
-        "width": 180,
+        "width": "100%",
         "height": 300
     },
     "position": {
-        "vertical": "middle",
+        "vertical": "top",
         "horizontal": "middle"
     }
 }
