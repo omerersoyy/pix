@@ -7,6 +7,7 @@ import config from '../integration-config.json'
 import { extractImageSet, getFlexPositions } from '../util/helpers/DataHelper'
 import styles from './styles/MainScreenStyles'
 import GenericHeader from '../components/GenericHeader'
+import i18n from '../util/I18n'
 
 
 const MainScreen = ({ dispatch, data, error }) => {
@@ -36,10 +37,10 @@ const MainScreen = ({ dispatch, data, error }) => {
     useEffect(() => {
         if (error) {
             Alert.alert(
-                "Bir hata oluştu!",
+                i18n.t('errorDialogTitle'),
                 error,
                 [
-                    { text: "Kapat" }
+                    { text: i18n.t('close') }
                 ],
                 { cancelable: true }
             );
@@ -48,7 +49,7 @@ const MainScreen = ({ dispatch, data, error }) => {
 
     return (
         <View style={styles.container}>
-            <GenericHeader title={'Pix Gallery'} />
+            <GenericHeader title={i18n.t('mainScreenHeader')} />
             {
                 imageSet.map((val, idx) => {
                     return (
