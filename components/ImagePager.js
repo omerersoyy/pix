@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from "react";
-import { View, Text } from "react-native";
-import { FlingGestureHandler, Directions } from 'react-native-gesture-handler'
-import { getSwipeDirection } from '../util/helpers/GestureHelper'
+import React, { useEffect } from "react"
+import { Text } from "react-native"
 import Animated, { Easing } from 'react-native-reanimated'
 import styles from './styles/ImagePagerStyles'
 
-export default ImagePager = ({ current, total, opacity = new Animated.Value(1) }) => {
+export default ImagePager = ({ current, total }) => {
+
+    const opacity = new Animated.Value(1)
 
     const fadeOut = () => {
         return (
